@@ -1,0 +1,34 @@
+<h2>Sign up using this form</h2>
+
+<?php echo $this->tag->form("signup/register"); ?>
+
+<p>
+	<label for="first_name">First Name</label>
+	<?php echo $this->tag->textField("first_name"); ?>
+</p>
+<p>
+	<label for="middle_name">Middle Name</label>
+	<?php echo $this->tag->textField("middle_name"); ?>
+</p>
+<p>
+	<label for="last_name">Last Name</label>
+	<?php echo $this->tag->textField("last_name"); ?>
+</p>
+
+<p>
+	<label for="birth_date">Birth Date</label>
+	<?php echo $this->tag->textField("birth_date"); ?>
+</p>
+<p>
+	<label for="pan_number">Pan No</label>
+	<?php echo $this->tag->textField("pan_number"); ?>
+</p>
+<p>
+	<label for="aadhar_number">Aadhar No</label>
+	<?php echo $this->tag->textField("aadhar_number"); ?>
+</p>
+<p>
+	<?php echo $this->tag->submitButton("Register"); ?>
+</p>
+
+</form>
