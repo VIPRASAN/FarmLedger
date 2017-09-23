@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.19, for Linux (x86_64)
 --
--- Host: localhost    Database: sams
+-- Host: 127.0.0.1    Database: sams
 -- ------------------------------------------------------
 -- Server version	5.7.19-0ubuntu0.16.04.1
 
@@ -14,14 +14,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `sams`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `sams` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `sams`;
 
 --
 -- Table structure for table `crops`
@@ -166,6 +158,61 @@ LOCK TABLES `farms` WRITE;
 /*!40000 ALTER TABLE `farms` DISABLE KEYS */;
 /*!40000 ALTER TABLE `farms` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `transaction_types`
+--
+
+DROP TABLE IF EXISTS `transaction_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transaction_types` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction_types`
+--
+
+LOCK TABLES `transaction_types` WRITE;
+/*!40000 ALTER TABLE `transaction_types` DISABLE KEYS */;
+INSERT INTO `transaction_types` VALUES (1,'credit',1),(2,'debit',1);
+/*!40000 ALTER TABLE `transaction_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transactions` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `farmer_id` int(11) NOT NULL,
+  `farmer_crop_id` int(11) NOT NULL,
+  `transaction_type_id` int(11) NOT NULL,
+  `transaction_amount` float NOT NULL,
+  `transaction_datetime` datetime NOT NULL,
+  `memo` varchar(500) NOT NULL,
+  `added_by` int(11) NOT NULL,
+  `added_on` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -176,4 +223,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-11  8:49:02
+-- Dump completed on 2017-09-23  6:22:28
