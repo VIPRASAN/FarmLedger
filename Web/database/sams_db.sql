@@ -116,6 +116,8 @@ CREATE TABLE `farmers` (
   `email_address` varchar(50) DEFAULT NULL,
   `phone_number` varchar(15) DEFAULT NULL,
   `mobile_number` int(10) DEFAULT NULL,
+  `username` varchar(20) NOT NULL,
+  `password_encrypted` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -126,7 +128,7 @@ CREATE TABLE `farmers` (
 
 LOCK TABLES `farmers` WRITE;
 /*!40000 ALTER TABLE `farmers` DISABLE KEYS */;
-INSERT INTO `farmers` VALUES (1,'Sandeep','G','Chavhan','1982-03-25','ABCD1234E',123456789,NULL,NULL,NULL),(2,'Sandeep','G','Chavhan','1982-03-25','ABCD1234E',123456789,NULL,NULL,NULL),(3,'Preetam','B','Yadav','1983-01-05','ABCD123E',1234567890,NULL,NULL,NULL);
+INSERT INTO `farmers` VALUES (1,'Sandeep','G','Chavhan','1982-03-25','ABCD1234E',123456789,NULL,NULL,NULL,'',''),(2,'Sandeep','G','Chavhan','1982-03-25','ABCD1234E',123456789,NULL,NULL,NULL,'',''),(3,'Preetam','B','Yadav','1983-01-05','ABCD123E',1234567890,NULL,NULL,NULL,'','');
 /*!40000 ALTER TABLE `farmers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-23  6:22:28
+-- Dump completed on 2017-09-26  3:42:18
