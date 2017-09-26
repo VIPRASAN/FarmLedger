@@ -1,4 +1,4 @@
-<h2>Sign up using this form</h2>
+<h2>Sign up / Register</h2>
 
 <?php echo $this->tag->form("signup/register"); ?>
 
@@ -16,16 +16,16 @@
 </p>
 
 <p>
-	<label for="birth_date">Birth Date</label>
-	<?php echo $this->tag->textField("birth_date"); ?>
+	<label for="username">User Name</label>
+	<?php echo $this->tag->textField("username"); ?>
 </p>
 <p>
-	<label for="pan_number">Pan No</label>
-	<?php echo $this->tag->textField("pan_number"); ?>
+	<label for="password">Password</label>
+	<?php echo $this->tag->passwordField("pan_number"); ?>
 </p>
 <p>
-	<label for="aadhar_number">Aadhar No</label>
-	<?php echo $this->tag->textField("aadhar_number"); ?>
+	<label for="password_confirm">Confirm Password</label>
+	<?php echo $this->tag->passwordField("password_confirm"); ?>
 </p>
 <p>
 	<?php echo $this->tag->submitButton("Register"); ?>

@@ -1,6 +1,7 @@
 <?php
 
 use Phalcon\Loader;
+use Phalcon\Config;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\Mvc\Url as UrlProvider;
@@ -9,66 +10,78 @@ use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 
 
 // Define some absolute path constants to aid in locating resources
-define('BASE_PATH', dirname(__DIR__));
-define('APP_PATH', BASE_PATH . '/app');
+define( 'BASE_PATH', dirname( __DIR__ ) );
+define( 'APP_PATH', BASE_PATH . '/app' );
 
 // Register an autoloader
-$loader = new Loader();
+$objAutoLoader = new Loader();
 
-$loader->registerDirs(
+$objAutoLoader->registerDirs(
 	[
 		APP_PATH . '/controllers/',
 		APP_PATH . '/models/',
 	]
 );
 
-$loader->register();
+$objAutoLoader->register();
 
 // Create a DI
-$di = new FactoryDefault();
+$objDiContainer = new FactoryDefault();
 
 // Setup the view component
-$di->set(
+$objDiContainer->set(
 	'view',
 	function () {
-		$view = new View();
-		$view->setViewsDir(APP_PATH . '/views/');
-		return $view;
+		$objView = new View();
+		$objView->setViewsDir( APP_PATH . '/views/' );
+		return $objView;
+	}
+);
+
+$objDiContainer->set(
+	'config',
+	function () {
+		$configDataFilePath = require BASE_PATH . '/../../FarmLedgerConfig/default_config.php';
+
+		return new Config( $configDataFilePath );
 	}
 );
 
 // Setup a base URI so that all generated URIs include the "tutorial" folder
-$di->set(
+$objDiContainer->set(
 	'url',
 	function () {
-		$url = new UrlProvider();
-		$url->setBaseUri('/');
-		return $url;
+		$objUrlProvider = new UrlProvider();
+		$objUrlProvider->setBaseUri( '/' );
+		return $objUrlProvider;
 	}
 );
 
 // Setup the database service
-$di->set(
+$objDiContainer->set(
 	'db',
 	function () {
+
+		$objConfig = $this->get( 'config' );
+
 		return new DbAdapter(
 			[
-				'host'     => 'localhost',
-				'username' => 'phalcon',
-				'password' => 'secret',
-				'dbname'   => 'sams',
+				'host'     => $objConfig->database->host,
+				'username' => $objConfig->database->username,
+				'password' => $objConfig->database->password,
+				'dbname'   => $objConfig->database->dbname,
 			]
 		);
 	}
 );
 
-$application = new Application($di);
+$objApplication = new Application( $objDiContainer );
 
 try {
 	// Handle the request
-	$response = $application->handle();
+	$objResponse = $objApplication->handle();
 
-	$response->send();
-} catch (\Exception $e) {
-	echo 'Exception: ', $e->getMessage();
+	$objResponse->send();
+} catch ( \Exception $objException ) {
+	echo 'Exception: ', $objException->getMessage();
 }
