@@ -12,13 +12,9 @@ class LoginController extends Controller {
 
 		$objFarmer = Farmers::findFirstByUsername( 'pyadav' );
 
-		var_dump( $this->request->getPost( 'username' ) );
-		var_dump( $objFarmer );
-		exit;
-
 		if( $objFarmer ) {
 			if( $this->security->checkHash( $this->request->getPost( 'password' ), $objFarmer->password_encrypted ) ) {
-				echo 'Valid Login !!!';
+				echo 'Login Successful !!!';
 			}
 		} else {
 			// To protect against timing attacks. Regardless of whether a user
