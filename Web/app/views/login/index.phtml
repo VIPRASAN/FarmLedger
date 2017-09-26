@@ -1,0 +1,17 @@
+<h2>Sign In / Login </h2>
+
+<?php echo $this->tag->form("login/attemptLogin"); ?>
+
+<p>
+	<label for="username">User Name</label>
+	<?php echo $this->tag->textField("username"); ?>
+</p>
+<p>
+	<label for="password">Password</label>
+	<?php echo $this->tag->passwordField("password"); ?>
+</p>
+<p>
+	<?php echo $this->tag->submitButton("Login"); ?>
+</p>
+
+</form>

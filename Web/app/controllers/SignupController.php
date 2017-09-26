@@ -2,40 +2,33 @@
 
 use Phalcon\Mvc\Controller;
 
-class SignupController extends Controller
-{
-	public function indexAction()
-	{
+class SignupController extends Controller {
+
+	public function indexAction() {
 
 	}
 
-	public function registerAction()
-	{
+	public function registerAction() {
 		$objFarmer = new Farmers();
 
-		// Store and check for errors
-		$success = $objFarmer->save(
-			$this->request->getPost(),
-			[
-				"first_name",
-				"middle_name",
-				"last_name",
-				"birth_date",
-				"pan_number",
-				"aadhar_number",
-			]
-		);
+		$objFarmer->first_name = $this->request->getPost( 'first_name' );
+		$objFarmer->middle_name = $this->request->getPost( 'middle_name' );
+		$objFarmer->last_name = $this->request->getPost( 'last_name' );
+		$objFarmer->username = $this->request->getPost( 'username' );
 
-		if ($success) {
-			echo "Thanks for registering!";
+		// Store the password hashed
+		$objFarmer->password_encrypted = $this->security->hash( $this->request->getPost( 'password' ) );
+
+		if( true == $objFarmer->save() ) {
+			echo 'Thanks for registering!';
 			PHP_EOL;
 		} else {
-			echo "Sorry, the following problems were generated: ";
+			echo 'Sorry, the following problems were generated: ';
 
 			$messages = $objFarmer->getMessages();
 
-			foreach ($messages as $message) {
-				echo $message->getMessage(), "<br/>";
+			foreach( $messages as $message ) {
+				echo $message->getMessage(), '<br\/>';
 			}
 		}
 
