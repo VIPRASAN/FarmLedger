@@ -7,6 +7,7 @@ use Phalcon\Mvc\Application;
 use Phalcon\Mvc\Url as UrlProvider;
 use Phalcon\Di\FactoryDefault;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use Phalcon\Session\Adapter\Files as Session;
 
 
 // Define some absolute path constants to aid in locating resources
@@ -19,6 +20,9 @@ $objAutoLoader = new Loader();
 $objAutoLoader->registerDirs(
 	[
 		APP_PATH . '/controllers/',
+		APP_PATH . '/controllers/Authentication',
+		APP_PATH . '/controllers/Ledger',
+		APP_PATH . '/controllers/Profile',
 		APP_PATH . '/models/',
 	]
 );
@@ -72,6 +76,17 @@ $objDiContainer->set(
 				'dbname'   => $objConfig->database->dbname,
 			]
 		);
+	}
+);
+
+// Start the session the first time when some component request the session service
+$objDiContainer->setShared(
+	'session',
+	function () {
+		$objSession = new Session();
+		$objSession->start();
+
+		return $objSession;
 	}
 );
 

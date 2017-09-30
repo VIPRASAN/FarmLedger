@@ -11,4 +11,7 @@ class Farmers extends Model
 	public $birth_date;
 	public $pan_number;
 	public $aadhar_number;
+	public $username;
+	public $password_encrypted;
+
 }

@@ -1,0 +1,23 @@
+<h2>Hello ! <?php echo $farmer_first_name; ?> </h2>
+
+<p><?php
+
+echo $this->tag->linkTo( "ledger_list", "View Expenses" );
+echo PHP_EOL;
+?>
+</p>
+<p><?php
+
+echo $this->tag->linkTo( "add_expenses", "Add Expenses" );
+echo PHP_EOL;
+?>
+</p>
+<p><?php
+echo $this->tag->linkTo( "my_profile/changePassword", "Change Password" );
+echo PHP_EOL;
+?>
+</p>
+<p><?php
+echo $this->tag->linkTo( "my_profile/logout", "Logout" );
+?>
+</p>
