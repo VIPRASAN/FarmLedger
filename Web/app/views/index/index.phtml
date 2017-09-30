@@ -1,12 +1,12 @@
 <?php
 
-echo "<h1>Hello Farmer !</h1>";
+echo '<h1>Hello Farmer !</h1>';
 
-echo PHP_EOL;
+echo PHP_EOL . PHP_EOL;
 
-echo PHP_EOL;
+echo '<p>' . $this->tag->linkTo( 'login', 'Login' ) . '</p>';
 
-echo $this->tag->linkTo(
-	"signup",
-	"Sign Up Here!"
-);
+echo PHP_EOL . PHP_EOL;
+
+echo $this->tag->linkTo( 'signup', 'Sign Up' );
+
