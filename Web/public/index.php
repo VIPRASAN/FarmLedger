@@ -1,5 +1,9 @@
 <?php
 
+echo "<h1> Coming Sooon </h1>";
+exit;
+
+
 use Phalcon\Loader;
 use Phalcon\Config;
 use Phalcon\Mvc\View;
