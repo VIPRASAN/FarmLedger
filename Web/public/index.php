@@ -1,9 +1,5 @@
 <?php
 
-echo "<h1> Coming Sooon </h1>";
-exit;
-
-
 use Phalcon\Loader;
 use Phalcon\Config;
 use Phalcon\Mvc\View;
@@ -36,6 +32,22 @@ $objAutoLoader->register();
 // Create a DI
 $objDiContainer = new FactoryDefault();
 
+// Setup the config component
+$objDiContainer->set(
+	'config',
+	function () {
+		$configDataFilePath = require BASE_PATH . '/../../FarmLedgerConfig/default_config.php';
+
+		return new Config( $configDataFilePath );
+	}
+);
+
+
+if( true == $objDiContainer->get( 'config' )->site_maintenance ) {
+	require 'index.html';
+	exit;
+}
+
 // Setup the view component
 $objDiContainer->set(
 	'view',
@@ -43,15 +55,6 @@ $objDiContainer->set(
 		$objView = new View();
 		$objView->setViewsDir( APP_PATH . '/views/' );
 		return $objView;
-	}
-);
-
-$objDiContainer->set(
-	'config',
-	function () {
-		$configDataFilePath = require BASE_PATH . '/../../FarmLedgerConfig/default_config.php';
-
-		return new Config( $configDataFilePath );
 	}
 );
 

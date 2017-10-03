@@ -19,7 +19,7 @@ class LoginController extends Controller {
 
 				// Set Seesion and then redirect to my profile
 
-				$this->session->set( 'farmer_first_name', $objFarmer->first_name );
+				$this->session->set( 'farmer_first_name', $objFarmer->getFirstName() );
 
 				// A HTTP Redirect
 				return $this->response->redirect( 'my_profile/index' );
